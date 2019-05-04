@@ -1,0 +1,34 @@
+#ow, comecei um curso de docker na Udemy!
+
+#Change the bash permission with the line bellow
+#sudo chmod +x bashtest
+
+echo "Informe o que deseja executar: "
+echo "1 - docker test (Hello World)"
+
+read input;
+
+if [ "$input" -eq 1 ]
+then
+  docker container run hello-world
+fi
+
+
+
+
+
+
+
+
+
+#Helping notes
+#-eq : (equal) Igual à
+#-ne : (not equal) Diferente de
+#-lt : (less than) Menor que
+#-gt : (greater than) Maior que
+#-le : (less or egual) Menor ou igual à
+#-ge : (greater or equal) Maior ou igual à
+#= : Igual à (isso mesmo apenas um sinal de igual)
+#!= : Diferente de
+#-n : String existe e não é vazia (apenas um operador)
+#**-z **: String existe e é vazia (apenas um operador)
