@@ -15,13 +15,9 @@ fi
 
 
 
-
-
-
-
-
-
 #Helping notes
+
+#For shell script
 #-eq : (equal) Igual à
 #-ne : (not equal) Diferente de
 #-lt : (less than) Menor que

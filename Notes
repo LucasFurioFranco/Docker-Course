@@ -1,0 +1,54 @@
+O docker run executa os seguintes comandos:
+  >docker container create
+  >docker container start
+  >docker container exec
+
+Ver também:
+  >docker container ls -a
+  >docker ps -a
+
+Exemplo de docker run:
+  >docker container run --help
+  >docker container run debian bash --version
+  >docker container run --rm debian bash --version #remove o container após o término do processo
+  >docker container run -it debian bash
+    -i: modo iterativo
+    -t: nos dáacesso ao terminal do container
+  >docker container run --name mydeb -it debian bash
+  >docker container run -p 8080:80 nginx
+    -p: mapeamento de portas. Ex de uso: -p 8080:80 -> a porta 8080 do host está vinculada à porta 80 do container
+  #executar o comando abaixo a aprtir da pasta pai da ex-volume
+  >docker container run -p 8080:80 -v "$(pwd)"/ex-volume/html:/usr/share/nginx/html nginx
+    -v: mapeia volumes. Ex: -v $(pwd)/ex-volume/html:/urs/share/nginx/html. O path "/urs/share/nginx/html" do container apontará para path "$(pwd)/ex-volume/html" do host
+      "$(pwd)": pega a pasta corrente. As aspas resolvem possíveis problemas da pasta conter espaços.
+
+
+
+O método run SEMPRE cria um novo container
+
+Nomeando seus containers
+  >docker container run --name mydeb -it debian bash
+
+Reutilizando containers
+  >docker container start -ai mydeb
+  #docker container start -<flags> <container_name>
+    -a: apache - pega o terminal
+    -i: modo iterativo
+
+Compartilhamentos/comunicação:
+  - Portas
+    - Mapeamento de portas
+  - Pasta entre host e containers
+    - Mapeamento de volumes
+  - Copiar arquivos entre containers e host
+  - Comunicação entre containers diferentes
+
+Mapeamento de Portas - uso de nginx
+  >docker container run -p 8080:80 nginx
+    -p: mapeamento de portas. Ex de uso: -p 8080:80 -> a porta 8080 do host está vinculada à porta 80 do container
+
+Mapeamento de volumes
+  #foi criada a pasta ex-volume
+  >docker container run -p 8080:80 -v $(pwd)/ex-volume/html:/urs/share/nginx/html nginx
+    -v: mapeia volumes. Ex: -v $(pwd)/ex-volume/html:/urs/share/nginx/html. O path "/urs/share/nginx/html" do container apontará para path "$(pwd)/ex-volume/html" do host
+      $(pwd): pega a pasta corrente
