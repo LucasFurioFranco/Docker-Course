@@ -19,8 +19,30 @@ Exemplo de docker run:
     -p: mapeamento de portas. Ex de uso: -p 8080:80 -> a porta 8080 do host está vinculada à porta 80 do container
   #executar o comando abaixo a aprtir da pasta pai da ex-volume
   >docker container run -p 8080:80 -v "$(pwd)"/ex-volume/html:/usr/share/nginx/html nginx
-    -v: mapeia volumes. Ex: -v $(pwd)/ex-volume/html:/urs/share/nginx/html. O path "/urs/share/nginx/html" do container apontará para path "$(pwd)/ex-volume/html" do host
+    -v: mapeia volumes. Ex: -v "$(pwd)"/ex-volume/html:/usr/share/nginx/html. O path "/usr/share/nginx/html" do container apontará para path "$(pwd)/ex-volume/html" do host
       "$(pwd)": pega a pasta corrente. As aspas resolvem possíveis problemas da pasta conter espaços.
+  #executar o comando abaixo a aprtir da pasta pai da ex-volume
+  >docker container run -d --name ex-daemon-basic -p 8080:80 -v $(pwd)/ex-volume/html:/usr/share/nginx/html nginx
+    -d: modo daemon, mantém o container rodando em background
+  >docker container stop ex-daemon-basic
+    #docker container stop <nome_do_container_já_existente>
+    #Comando para parar um container
+  >docker container start ex-daemon-basic
+    #docker container start <nome_do_container_já_existente>
+    #Comando para iniciar um container
+  >docker container restart ex-daemon-basic
+    #docker container restart <nome_do_container_já_existente>
+    #Comando para reiniciar um container - ele pode estar já rodando ou já ter sido parado
+  >docker container logs ex-daemon-basic
+    #docker container logs <nome_do_container_já_existente>
+  >docker container inspect ex-daemon-basic
+    #docker container inspect <nome_do_container_já_existente>
+    #Retorna um vetor de objetos (JSON) com informações do container, como os binds (mapeamento de volumes)
+  >docker container exec ex-daemon-basic uname -or
+    #executa o comando uname dentro do container
+
+
+
 
 
 
@@ -38,7 +60,7 @@ Reutilizando containers
 Compartilhamentos/comunicação:
   - Portas
     - Mapeamento de portas
-  - Pasta entre host e containers
+  - Compartilhamento de pastas entre host e containers
     - Mapeamento de volumes
   - Copiar arquivos entre containers e host
   - Comunicação entre containers diferentes
@@ -49,6 +71,29 @@ Mapeamento de Portas - uso de nginx
 
 Mapeamento de volumes
   #foi criada a pasta ex-volume
-  >docker container run -p 8080:80 -v $(pwd)/ex-volume/html:/urs/share/nginx/html nginx
-    -v: mapeia volumes. Ex: -v $(pwd)/ex-volume/html:/urs/share/nginx/html. O path "/urs/share/nginx/html" do container apontará para path "$(pwd)/ex-volume/html" do host
+  >docker container run -p 8080:80 -v "$(pwd)"/ex-volume/html:/usr/share/nginx/html nginx
+    -v: mapeia volumes. Ex: -v "$(pwd)"/ex-volume/html:/usr/share/nginx/html. O path "/usr/share/nginx/html" do container apontará para path "$(pwd)/ex-volume/html" do host
       $(pwd): pega a pasta corrente
+      "$(pwd)": pega a pasta corrente e as aspas garantem q ue não haverá problemas caso a pasta tenha um nome contendo espaços
+
+Rodando um servidor web em background
+  >docker container run -d --name ex-daemon-basic -p 8080:80 -v $(pwd)/ex-volume/html:/usr/share/nginx/html nginx
+    -d: modo daemon, mantém o container rodando em background
+  >docker container stop ex-daemon-basic
+    #docker container stop <nome_do_container_já_existente>
+    #Comando para parar um container
+  >docker container start ex-daemon-basic
+    #docker container start <nome_do_container_já_existente>
+    #Comando para iniciar um container
+  >docker container restart ex-daemon-basic
+    #docker container restart <nome_do_container_já_existente>
+    #Comando para reiniciar um container - ele pode estar já rodando ou já ter sido parado
+
+Acessando os logs dos containers
+  >docker container logs ex-daemon-basic
+    #docker container logs <nome_do_container_já_existente>
+  >docker container inspect ex-daemon-basic
+    #docker container inspect <nome_do_container_já_existente>
+    #Retorna um vetor de objetos (JSON) com informações do container, como os binds (mapeamento de volumes)
+  >docker container exec ex-daemon-basic uname -or
+    #executa o comando uname dentro do container
