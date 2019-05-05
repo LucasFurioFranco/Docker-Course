@@ -40,7 +40,13 @@ Exemplo de docker run:
     #Retorna um vetor de objetos (JSON) com informações do container, como os binds (mapeamento de volumes)
   >docker container exec ex-daemon-basic uname -or
     #executa o comando uname dentro do container
-
+  >docker container ls
+    #lista os containeres
+  >docker container ls
+    #lista as imagens
+  >docker volume ls
+    #lista os volumes
+  
 
 
 
