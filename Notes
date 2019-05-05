@@ -7,7 +7,7 @@ Ver também:
   >docker container ls -a
   >docker ps -a
 
-Exemplo de docker run:
+Exemplos de comandos do docker:
   >docker container run --help
   >docker container run debian bash --version
   >docker container run --rm debian bash --version #remove o container após o término do processo
@@ -46,7 +46,7 @@ Exemplo de docker run:
     #lista as imagens
   >docker volume ls
     #lista os volumes
-  
+
 
 
 
@@ -103,3 +103,30 @@ Acessando os logs dos containers
     #Retorna um vetor de objetos (JSON) com informações do container, como os binds (mapeamento de volumes)
   >docker container exec ex-daemon-basic uname -or
     #executa o comando uname dentro do container
+
+
+
+Imagens
+  >docker image --help
+  >docker image pull redis:latest
+
+Comandos básicos de gerenciamento de imagens
+  #pull, ls, rm, inspect, tag, build, push
+  #pull - baixa a imagem diretamente do docker hub (geralmente ocorre de forma implícita, como quando ocorre um run de uma imagem que não erstá na máquina)
+  #ls - lista as imagens presentes na máquina
+  #rm - remove uma ou mais imagens. Para demover mais de uma específicas, especificar as tags ou hashs separados pos espaço
+  #inspect - passando o nome da tag, recebemos as informações no sobre a imagem no formato JSON
+  #tag - docker image <imagem_de_origem> <tag_a_ser_aplicada> - aplica uma tag em uma imagem
+  #build - interpreta um arquivo descritor do docker (DockerFile) e cria a imagem a partir dele
+  #push - sobre a imagem pro registro
+
+Dockerhub vs Docker Registry
+  #não são as mesmas coisas, o DockerHub contém um Docker Registry, porém podemos criar e hospedar um registro próprio, por exemplo para projetos privados
+  #O Docker Registry é um serviço que oferece uma API para o gerenciamento das imagens em algum servidor
+
+Meu primeiro Build
+  #vamos criar um descritor. Está em primeiro-build/Dockerfile
+  #na pasta onde o dockerfile está presente (no caso, .../Docker/primeiro-build), executar o comando abaixo
+  >docker image build -t ex-simple-build .
+  >docker image ls #verifica se a imagem foi criada
+  >docker container run -p 80:80 ex-simple-build #cria o container a partir desta imagem e o executa
