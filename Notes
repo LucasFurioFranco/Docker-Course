@@ -50,6 +50,17 @@ Exemplos de comandos do docker:
 
 
 
+fiz esse repositório!
+https://github.com/LucasFurioFranco/Docker-Course
+
+Daí já tô praticando git tbm!
+2:56 PM
+Fiquei meia hora sem entender o pq n tava funcionando, acabou q eu tinha digitado /urs/ ao invés de /usr/ num path
+4:32 PM
+Show de bola Banho!
+4:45 PM
+
+
 
 
 O método run SEMPRE cria um novo container
@@ -130,3 +141,6 @@ Meu primeiro Build
   >docker image build -t ex-simple-build .
   >docker image ls #verifica se a imagem foi criada
   >docker container run -p 80:80 ex-simple-build #cria o container a partir desta imagem e o executa
+  #a imagem pode conter mapeamento de portas, volume, comandos (ex: instalação de git, etc)
+
+Uso das instruções de preparação
