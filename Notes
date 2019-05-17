@@ -139,8 +139,19 @@ Meu primeiro Build
   #vamos criar um descritor. Está em primeiro-build/Dockerfile
   #na pasta onde o dockerfile está presente (no caso, .../Docker/primeiro-build), executar o comando abaixo
   >docker image build -t ex-simple-build .
+    -t: nome da tag da imagem. Ex: ... -t meu_nome_da_imagem
   >docker image ls #verifica se a imagem foi criada
   >docker container run -p 80:80 ex-simple-build #cria o container a partir desta imagem e o executa
   #a imagem pode conter mapeamento de portas, volume, comandos (ex: instalação de git, etc)
 
-Uso das instruções de preparação
+Uso das instruções de preparação - ajuda a criar pontos de personalização
+#em /build-com-arg, com seu Dockerfile já criado
+  >docker image build -t ex-build-arg .
+  >docker container run ex-build-arg bash -c 'echo $S3_BUCKET'
+#agora passando parametros
+  >docker image build --build-arg S3_BUCKET=myapp -t ex-build-arg .
+  >docker container run ex-build-arg bash -c 'echo $S3_BUCKET'
+#acessando o inspect
+  >docker image inspect --format="{{index .Config.Labels \"maintainer\"}}" ex-build-arg
+
+Uso das instruções de povoamento
